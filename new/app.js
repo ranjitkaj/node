@@ -12,8 +12,12 @@ const { error } = require("node:console")
 
 // a.readFile("./c.txt", 'utf-8', (error, data) =>{
 
-//     if(error){console.log(error)}
-//     else{console.log(data)}
+//     if(error){
+    // console.log(error)
+    // }
+    // else{
+    // console.log(data)
+    // }
 
 // })
 
