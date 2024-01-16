@@ -16,6 +16,7 @@ Server = http.createServer((req, res)=>{
     contact = fs.readFileSync('./contact.html','utf8')
     education = fs.readFileSync('./EDUCATION.html','utf8')
     about = fs.readFileSync('./about me.html','utf8')
+    
     if(req.url==='/'){res.end(index)}
     if(req.url==='/contact'){res.end(contact)}
     if(req.url==='/education'){res.end(education)}
