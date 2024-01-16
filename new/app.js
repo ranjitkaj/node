@@ -1,4 +1,6 @@
-a = require("node:fs")
+// a = require("node:fs")
+
+const { error } = require("node:console")
 
 // console.log('ushboo')
 // console.log('This  Patna')
@@ -18,5 +20,19 @@ a = require("node:fs")
 // console.log('mukesh')
 // console.log('Patna')
 
-a.writeFileSync('./e.txt', 'This is Patna.')
+// a.writeFileSync('./e.txt', 'This is Patna.')
+
+
+fs = require("node:fs")
+
+fs.writeFile('./f.txt', 'I am Ranjit from NSTI Patna.', (error) =>{
+    if(error){
+        console.log(error)
+    }
+    else{
+        console.log('Successfully Created.')
+    }
+})
+
+
 
