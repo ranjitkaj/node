@@ -15,10 +15,11 @@ Server = http.createServer((req, res)=>{
     index = fs.readFileSync('./index.html','utf8')
     contact = fs.readFileSync('./contact.html','utf8')
     education = fs.readFileSync('./EDUCATION.html','utf8')
+    about = fs.readFileSync('./about me.html','utf8')
     if(req.url==='/'){res.end(index)}
     if(req.url==='/contact'){res.end(contact)}
     if(req.url==='/education'){res.end(education)}
-    
+    if(req.url==='/about'){res.end(about)}
 
 })
 
