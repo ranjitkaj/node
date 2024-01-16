@@ -29,7 +29,7 @@ const { error } = require("node:console")
 
 fs = require("node:fs")
 
-fs.writeFile('./f.txt', 'I am Ranjit from NSTI Patna.', (error) =>{
+fs.writeFile('./f.txt', 'I am Ranjit from NSTI Allahabad.', {flag: "a"}, (error) =>{
     if(error){
         console.log(error)
     }
@@ -37,6 +37,9 @@ fs.writeFile('./f.txt', 'I am Ranjit from NSTI Patna.', (error) =>{
         console.log('Successfully Created.')
     }
 })
+
+
+
 
 
 
