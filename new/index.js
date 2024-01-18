@@ -41,13 +41,13 @@ Server = http.createServer((req, res)=>{
         else(data);
       });
     
-    
+
     
     if(req.url==='/'){res.end(index)}
-    if(req.url==='/contact'){res.end(contact)}
-    if(req.url==='/education'){res.end(education)}
-    if(req.url==='/about'){res.end(about)}
-    if(req.img){res.end(img)}
+    else if(req.url==='/contact'){res.end(contact)}
+    else if(req.url==='/education'){res.end(education)}
+    else if(req.url==='/about'){res.end(about)}
+    else if(req.img){res.end(img)}
    
 })
 
