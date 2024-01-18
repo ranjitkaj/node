@@ -23,7 +23,7 @@ fs = require('node:fs');
 //     }
 // );
 
-raj = fs.readFile('./r.jpg', function (err, data) {
+fs.readFile('./r.jpg', function (err, data) {
     if (err) throw err;
     else(data);
   });
