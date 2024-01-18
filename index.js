@@ -7,4 +7,4 @@ Server = http.createServer((req, res)=> {
     res.end(data)
 })
 
-Server.listen(3000, ()=>{console.log('Successfull')})
+Server.listen(3000, ()=>{console.log('Successfull')})    
