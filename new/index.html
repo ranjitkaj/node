@@ -11,7 +11,7 @@ padding: 16px 32px;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
-  margin: 4px 4px;}
+  margin: 4px 4px;}
 .left {
 		left:0;
 		width:50%;
@@ -33,21 +33,6 @@ padding: 16px 32px;
 </style>
 </head>
 <body>
-
-<script>
-  window.watsonAssistantChatOptions = {
-    integrationID: "d7731b0a-c72c-47a7-869d-8a75d76ad3bb", // The ID of this integration.
-    region: "au-syd", // The region your integration is hosted in.
-    serviceInstanceID: "160541af-0713-4d86-abbb-d9e16e5f9171", // The ID of your service instance.
-    onLoad: async (instance) => { await instance.render(); }
-  };
-  setTimeout(function(){
-    const t=document.createElement('script');
-    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
-    document.head.appendChild(t);
-  });
-</script>
-
 
 <fieldset style="font-size:20px; text-align:center; background-color:rgb(141,153,241);margin:20px;"><div style="height:20px;">
 <h4 style="float: right; margin:10px;">
@@ -90,4 +75,18 @@ title="Free Counter" Alt="web counter"   border="0" /></a>
 	</div>
 </footer>
 </body>
+<script>
+  window.watsonAssistantChatOptions = {
+    integrationID: "d7731b0a-c72c-47a7-869d-8a75d76ad3bb", // The ID of this integration.
+    region: "au-syd", // The region your integration is hosted in.
+    serviceInstanceID: "160541af-0713-4d86-abbb-d9e16e5f9171", // The ID of your service instance.
+    onLoad: async (instance) => { await instance.render(); }
+  };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js";
+    document.head.appendChild(t);
+  });
+</script>
+
 </html>
