@@ -1,5 +1,5 @@
-http = require('node:http')
-fs = require('node:fs')
+http = require('node:http');
+fs = require('node:fs');
 // Server = http.createServer((req, res)=>{
 //     data = {name:'Ranjit', location:'Patna', age:23}
 //     res.writeHead(200, {'Content-type':'application/json'})
@@ -11,11 +11,32 @@ fs = require('node:fs')
 
 // })
 
+
+
+
+
+// const file = fs.createWriteStream("image.jpg");
+// const request = http.get(
+//   "http://i.imgur.com/noKHQD5.jpeg",
+//   function (response) {
+//     response.pipe(file);
+//     }
+// );
+
+
+
+
+
+
+
+
+
 Server = http.createServer((req, res)=>{
     index = fs.readFileSync('./index.html','utf8')
     contact = fs.readFileSync('./contact.html','utf8')
     education = fs.readFileSync('./EDUCATION.html','utf8')
     about = fs.readFileSync('./about me.html','utf8')
+    
     
     if(req.url==='/'){res.end(index)}
     if(req.url==='/contact'){res.end(contact)}
