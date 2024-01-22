@@ -21,10 +21,9 @@ b = 25
 
 const count = b;
 console.log('count: %d', count);
-// Prints: count: 5, to stdout
+
 console.log('count:', count);
-// Prints: count: 5, to stdoutconst count = 2;
+
 console.log('count: %d', count);
-// Prints: count: 5, to stdout
+
 console.log('count:', count);
-// Prints: count: 5, to stdout
