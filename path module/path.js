@@ -1,12 +1,17 @@
 a = require('node:path')
 
+
+
+
+
+
 // console.log(a.join('folder', 'file', 'index.js'))
 
-console.log(a.join('/folder', 'file', 'index.js'))
+// console.log(a.join('/folder', 'file', 'index.js'))
 
-console.log(a.join('./folder', 'file', '../ranjit', 'index.js'))
+// console.log(a.join('./folder', 'file', '../ranjit', 'index.js'))
 
-console.log(a.isAbsolute(__filename))
+// console.log(a.isAbsolute(__filename))
 
 
 
