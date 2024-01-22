@@ -1,7 +1,7 @@
 a = require('node:path')
 
 
-
+console.log(a.resolve(__dirname, 'index.html'))
 
 
 
