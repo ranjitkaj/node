@@ -2,7 +2,7 @@ eventName = require('node:events')
 
 emitter = new eventName()
 
-emitter.on('module', ()=> {
+emitter.on('module', (name, type, number)=> {
     console.log('hii')
 })
 
