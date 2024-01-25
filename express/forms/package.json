@@ -1,0 +1,24 @@
+{
+  "name": "form-handling",
+  "version": "2.1.3",
+  "description": "my frist form handling application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
+    "start:prod": "node --watch index.js"
+  },
+  "keywords": [
+    "dev",
+    "test",
+    "deploy",
+    "ranjit",
+    "mukesh"
+  ],
+  "author": "Ranjit",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
