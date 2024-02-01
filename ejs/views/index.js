@@ -5,7 +5,12 @@ app.set('view engine', 'ejs')
 
 data = {
     name: 'ranjit',
-    age: 21
+    age: 21,
+    class: '10th',
+    marks: 90,
+    admin: true,
+    subjects: ['physics', 'maths', 'chemistry'],
+    
 }
 
 app.get('/', (req, res) => {
