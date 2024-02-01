@@ -107,16 +107,16 @@ module.exports = Usermodel;
 
 
 
-updateData = async(name)=>{
-    try {
-        const data = await Usermodel.updateOne({name:name});
-        console.log(data);
-    }
-    catch (error) {
-        console.log(error)
-    }
-}
-updateData("ranjit kumar");
+// updateData = async(name)=>{
+//     try {
+//         const data = await Usermodel.updateOne({name:name});
+//         console.log(data);
+//     }
+//     catch (error) {
+//         console.log(error)
+//     }
+// }
+// updateData("ranjit kumar");
 
 
 
@@ -148,25 +148,25 @@ updateData("ranjit kumar");
 
 
 
-// app.set("view engine","ejs");
-// app.use(express.urlencoded({extended:false}))
+app.set("view engine","ejs");
+app.use(express.urlencoded({extended:false}))
 
-// app.get("/",async(req,res)=>{
-//     const users = await User.find();
-//     res.render("index",{
-//         title:"this is homepage",
-//         users:users
-//     })
+app.get("/",async(req,res)=>{
+    const users = await User.find();
+    res.render("index.ejs",{
+        title:"this is homepage",
+        users:users
+    })
   
-// })
+})
 
-// app.post("/register",async(req,res)=>{
-//     const {name,email,password}=req.body;
-//     const newuser = new User({name,email,password});
-//     const usersave = await newuser.save();
-//     res.redirect("/");
-// })
+app.post("/register",async(req,res)=>{
+    const {name,email,password}=req.body;
+    const newuser = new User({name,email,password});
+    const usersave = await newuser.save();
+    res.redirect("/");
+})
 
-// app.get("/register",(req,res)=>{
-//     res.render("register");
-// })
+app.get("/register",(req,res)=>{
+    res.render("register");
+})
