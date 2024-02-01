@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <style>
+        table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th,td{
+            border: 1px solid black;
+            padding: 5px;
+            text-align: center;
+
+        }
+        a{
+            text-decoration: none;
+        }
+        .active{
+            background-color: blue;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            border-radius: 5px;
+            margin: 5px;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: blueviolet; text-align: center;">Students Data</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Date of Birth</th>
+            <th>City</th>
+            <th>Phone</th>
+            <th>Mail</th>
+            <th>Password</th>
+            <th>Oprations</th>
+        </tr>
+        <% for(var i=0;i<students.length;i++){ %>
+        <tr>
+            <td><%= students[i].fname %></td>
+            <td><%= students[i].dob %></td>
+            <td><%= students[i].city %></td>
+            <td><%= students[i].phone %></td>
+            <td><%= students[i].mail %></td>
+            <td><%= students[i].password %></td>
+            
+            <td><a href="/delete/<%= students[i]._id %>">Delete</a> | <a href="/Update/<%= students[i]._id %>">Update</a></td>
+        </tr>
+        <% } %>
+
+        
+    </table>
+    <center><a href="/register"><p class="active">Register</p></a></center>
+
+   
+</body>
+</html>
