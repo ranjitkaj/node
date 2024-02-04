@@ -28,7 +28,7 @@ app.post('/register', async (req, res) => {
         password: req.body.password
     }
 
-    const hasedpass = await password.bcrypt.genSalt(11);      
+    const hasedpass = await password.bcrypt.genSalt(11);
     newstudent = await student({
         username: data.username,
         password: hasedpass
@@ -52,7 +52,7 @@ app.post('/login', async (req, res) => {
     password = req.body.password;
 
     login = await student.findOne({ username: username });
-    const unhasedpass = await bcrypt.genSalt(11);
+
     if (login) {
         const isMatch = await unhasedpass == bcrypt.compare(password, login.password);
         if (isMatch) {
