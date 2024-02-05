@@ -1,24 +1,63 @@
-express = require("express");
-items = require("./route/item.js")
+// express = require("express");
+// items = require("./route/item.js")
+// app = express();
+// port = 3000;
+
+// app.use(express.json())
+// app.use(express.urlencoded())
+
+
+
+// app.listen(port, () => {
+//     console.log(`Started app listen on ${port}`);
+// })
+
+// session = require("express-session");
+// app.use(session({
+//     secret: "Ranjit",
+//     resave: false,
+//     saveUninitialized: true
+// }))
+
+// app.get("/", (req, res) => {
+//     req.session.uname = 'Ranjit';
+//     res.send(req.session.uname);
+
+// })
+
+express = require('express');
 app = express();
 port = 3000;
 
-app.use(express.json())
-app.use(express.urlencoded())
 
-app.use('/', items)
-
-app = listen(port, () => {
-    console.log(`Started app listen on ${port}`);
+app.listen(port, () => {
+    console.log(Server running on port ${port});
 })
 
-session = require("express-session");
+session = require('express-session');
+
 app.use(session({
-    secret: "Ranjit",
-    resave: false,
-    saveUninitialized: true
+    secret: 'Mukesh',
 }))
 
-app.get("/", (req, res) => {
-    res.send("Hello");
+// app.get('/', (req, res) => {
+//     req.session.uname = 'mukesh';
+//     res.send('Session created')
+// })
+
+app.get('/', (req, res) => {
+    if(req.session.user_visit){
+        req.session.user_visit++;
+        res.send('visit count: ' + req.session.user_visit)
+    }
+    else{
+        req.session.user_visit = 1;
+        res.send('this is your first visit')
+    }
 })
+
+
+
+
+//76ad7e18-36f8-4976-a409-98b7625f7a99
+//s%3AfRShUS9yiz-JA6niX4w2wGpzXuCxHBLN.JFggBiKL24e
