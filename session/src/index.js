@@ -14,7 +14,11 @@ app = listen(port, () => {
 
 session = require("express-session");
 app.use(session({
-    secret: "keyboard cat",
+    secret: "Ranjit",
     resave: false,
     saveUninitialized: true
 }))
+
+app.get("/", (req, res) => {
+    res.send("Hello");
+})
