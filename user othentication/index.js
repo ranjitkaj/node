@@ -1,3 +1,5 @@
+const { existsSync } = require('fs');
+
 express = require('express')
 app = express();
 path = require('path');
@@ -22,51 +24,53 @@ app.get('/register', async (req, res) => {
     res.render('register')
 })
 
+app.get('/home', async (req, res) => {
+    res.render('home')
+})
+
+
+
 app.post('/register', async (req, res) => {
     data = {
         username: req.body.username,
         password: req.body.password
     }
 
-    const hasedpass = await password.bcrypt.genSalt(11);
+    exists = await student.findOne({ username: data.username });
+    if(exists){
+        res.send('user already exists')  
+    }
+    else{
+
+    const hasedpass = await bcrypt.hash(data.password, 11);
     newstudent = await student({
         username: data.username,
         password: hasedpass
     })  
     newstudent.save()  
-    res.redirect('/')
+    res.redirect('/')}
+
 
 })
 
-app.get('/home', async (req, res) => {
-    res.render('home')
-})
+app.post('/', async (req, res) => {
+    data = {
+        
+        username: req.body.username,
+        password: req.body.password
 
-app.get('/login', async (req, res) => {
-    res.render('login')
-})
-
-
-app.post('/login', async (req, res) => {
-    username = req.body.username;
-    password = req.body.password;
-
-    login = await student.findOne({ username: username });
-
-    if (login) {
-        const isMatch = await unhasedpass == bcrypt.compare(password, login.password);
-        if (isMatch) {
+    }
+    checkuser = await student.findOne({ username: data.username });
+    if (checkuser) {
+        const checkpass = await bcrypt.compare(data.password, checkuser.password);
+        if (checkpass) {
             res.redirect('/home')
         } else {
-            res.redirect('invalid password')
-            res.redirect('/login')
-    
+            res.send('invalid password')
         }
+        }
+    else{
+        res.send('user not found')
     }
-    
-})
-// const hasedpass = await bcrypt.genSalt(11);
-
-
-
+    })
 
