@@ -14,14 +14,12 @@ app.listen(port, () => {
 
 session = require("express-session");
 app.use(session({
-    secret: "Ranjit",
-    resave: false,
-    saveUninitialized: true
+    secret: "Ranjit"
 }))
 
 app.get("/", (req, res) => {
-    req.session.uname = 'Ranjit';
-    res.send(req.session.uname);
+   // req.session.uname = 'Ranjit';
+    res.send('session sey');
 
 })
 
