@@ -5,7 +5,10 @@ app = express();
 path = require('path');
 bcrypt = require('bcrypt');
 student = require('./database');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 port = 3000;
+
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -27,6 +30,18 @@ app.get('/register', async (req, res) => {
 app.get('/home', async (req, res) => {
     res.render('home')
 })
+
+// #######################
+
+app.use(session({
+    secret: 'Ranjit    !!!!!!!!!!'
+
+}))
+
+app.use(cookieParser());
+
+
+
 
 
 
@@ -64,8 +79,11 @@ app.post('/', async (req, res) => {
     if (checkuser) {
         const checkpass = await bcrypt.compare(data.password, checkuser.password);
         if (checkpass) {
+            req.session.user = data.username
+            console.log(req.session.user)
             res.redirect('/home')
         } else {
+
             res.send('invalid password')
         }
         }
