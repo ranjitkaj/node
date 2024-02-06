@@ -2,6 +2,7 @@ nodemailer = require('nodemailer');
 otp = require('./index.js');
 
 
+sendMail = (mail, otp) => {
     let transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         port: 465,
@@ -16,6 +17,8 @@ otp = require('./index.js');
         to: 'kingranjit3899@gmail.com',
         subject: 'otp',
         text: `your otp is ${genotp()}`,
+        //html: `your otp is ${genotp()}`  
+
     };
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
@@ -24,4 +27,4 @@ otp = require('./index.js');
             console.log('Email sent: ' + info.response);
         }
     });
-    
+}
