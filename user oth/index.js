@@ -27,6 +27,7 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const otpGenerator = require('otp-generator');
+const ejs = require('ejs');
 path = require('path');
 
 const app = express();
@@ -34,6 +35,10 @@ const app = express();
 // Configure Nodemailer
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  
   auth: {
     user: 'ranjitkajraitha@gmail.com',
     pass: 'tueq jbzp beha bfmr'
@@ -67,6 +72,7 @@ app.get('/send-otp', (req, res) => {
     } else {
       console.log('OTP sent:', info.response);
       res.status(200).send('OTP sent successfully');
+      res.render('otp', { otp });
     }
   });
 });
@@ -93,17 +99,15 @@ app.get('/verify-otp', (req, res) => {
 //     }
 //     })
 
-app.post('/verify-otp', (req, res) => {
-  const userOTP = req.body.otp;
+app.post('/verify-otp', function (req, res) {
 
-  if (userOTP === otp) {
-    res.send('OTP verified successfully');
-  } else {
-    res.send('Invalid OTP');
-
+  if (req.body.otp == otp) {
+      res.send("You has been successfully registered");
   }
+  else {
+      res.render('incorrect otp');
   }
-)
+});
 
 // Start the server
 app.listen(3000, () => {
