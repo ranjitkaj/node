@@ -10,18 +10,23 @@
     <div class="container">
     
     <form action="/register-captcha" method="post">
-        <input type="text" name="fname" placeholder="Enter First Name" /><br />
-        <input type="text" name="lname" placeholder="Enter Last Name" /><br />
-        <input type="date" name="dob" placeholder="Enter Date of Birth" /><br />
-        <input type="text" name="city" placeholder="Enter City" /><br />
-        <input type="text" name="phone" placeholder="Enter Phone Number" /><br />
-        <input type="text" name="mail" placeholder="Enter Email" /><br />
-        <input type="password" name="password" placeholder="Enter Password" /><br />
+        <input type="text" name="fname" placeholder="Enter First Name" required/><br />
+        <input type="text" name="lname" placeholder="Enter Last Name" required/><br />
+        <input type="date" name="dob" placeholder="Enter Date of Birth" required /><br />
+        <input type="text" name="city" placeholder="Enter City" required /><br />
+        <input type="text" name="phone" placeholder="Enter Phone Number" required /><br />
+        <input type="text" name="mail" placeholder="Enter Email" required /><br />
+        <input type="password" name="password" id="pass"  placeholder="Enter Password" required /><br />
+        <input type="password" name="confirmPassword" id="cpass"  placeholder="Enter Confirm Password" required /><br />
         <img src="/a.gif" /><br />
         <input type="text" name="cap" placeholder="Enter Captcha" /><br />
-        <input class="btn" type="submit" value="submit" name="submit" />
+        <input class="btn" type="submit" value="submit"  name="submit" />
     </form>
     </div>
+
+    <script>
+    
+    </script>
 
 </body>
 </html>
