@@ -35,7 +35,22 @@ const otpGenerator = require('otp-generator');
 const captcha = require('trek-captcha');
 const ejs = require('ejs');
 path = require('path');
-fs = require('fs');
+fs = require('fs');3
+
+signup = require('./register.js');
+const repo = require('./repository')
+
+const { validateConfirmPassword } = require('./validator')
+
+
+app.get('/signup', (req, res) => {
+  res.send(signup({}));
+
+})
+
+
+const { validationResult } = require('express-validator');
+const { check } = require('express-validator');
 
 
 app.set('view engine', 'ejs')
@@ -122,36 +137,47 @@ app.get('/register-captcha', (req, res) => {
 
 
 
-app.post('/register-captcha', function (req, res) {
-
-  if ( req.body.cap == generatecaptcha ) {
-    
-  const email = req.body.email;
-  //const otp = generateOTP();
-  console.log(otp)
-
-  const mailOptions = {
-    from: 'ranjitkajraitha@gmail.com',
-    to: 'kingranjit3899@gmail.com',
-    subject: 'OTP Verification',
-    text: `Your OTP is: ${otp}`
-  };
-
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.log(error);
-      res.status(500).send('Failed to send OTP');
-    } else {
-      console.log('OTP sent:', info.response);
-      res.status(200)
-      res.render( 'verify-otp');
-    }
-       //res.send("You has been successfully registered");
-      res.render( 'verify-otp');
-  }
+app.post('/signup', function (req, res) {
+  data = {
+    fname: req.body.fname,
+    lname: req.body.lname,
+    dob: req.body.dob,
+    city: req.body.city,
+    phone: req.body.phone,
+    mail: req.body.mail,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword,
+    cap: req.body.cap
   
-  );
+  };
+  
+  if ( data.cap == generatecaptcha && data.phone.length == 10 && data.password == data.confirmPassword && data.password.length == 8) {
+      const mailOptions = {
+        from: 'ranjitkajraitha@gmail.com',
+        to: data.mail,
+        subject: 'OTP Verification',
+        text: `Hello ${data.fname} 
+        your password is: ${data.password},
+        your phone number is: ${data.phone},
+        Your OTP is: ${otp}`
+      };
+
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          res.status(500).send('Failed to send OTP');
+        } else {
+          console.log('OTP sent:', info.response);
+          res.status(200)
+          res.render( 'verify-otp');
+        }
+          //res.send("You has been successfully registered");
+          res.render( 'verify-otp');
+      });
  }
+  else {
+      res.render('incorrect captcha');
+  }
 });
 
 
