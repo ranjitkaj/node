@@ -121,7 +121,7 @@ app.get('/verify-otp', (req, res) => {
 app.post('/verify-otp', function (req, res) {
   if (req.body.otp == otp ) {
       res.send("You has been successfully registered");
-  }
+  }        
   else {
       res.render('incorrect otp');
   }
@@ -137,7 +137,7 @@ app.get('/register-captcha', (req, res) => {
 
 
 
-app.post('/signup', function (req, res) {
+app.post('/register-captcha', function (req, res) {
   data = {
     fname: req.body.fname,
     lname: req.body.lname,
@@ -151,7 +151,7 @@ app.post('/signup', function (req, res) {
   
   };
   
-  if ( data.cap == generatecaptcha && data.phone.length == 10 && data.password == data.confirmPassword && data.password.length == 8) {
+  if ( data.cap == generatecaptcha && data.phone.length == 10 && data.password == data.confirmPassword && data.fname != '' && data.lname != '' && data.dob != '' && data.city != '' && data.mail != '' && data.password != '' && data.confirmPassword != '' ) {
       const mailOptions = {
         from: 'ranjitkajraitha@gmail.com',
         to: data.mail,
@@ -171,8 +171,6 @@ app.post('/signup', function (req, res) {
           res.status(200)
           res.render( 'verify-otp');
         }
-          //res.send("You has been successfully registered");
-          res.render( 'verify-otp');
       });
  }
   else {
