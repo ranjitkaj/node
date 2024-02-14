@@ -34,23 +34,10 @@ const nodemailer = require('nodemailer');
 const otpGenerator = require('otp-generator');
 const captcha = require('trek-captcha');
 const ejs = require('ejs');
-path = require('path');
-fs = require('fs');3
-
-signup = require('./register.js');
-const repo = require('./repository')
-
-const { validateConfirmPassword } = require('./validator')
-
-
-app.get('/signup', (req, res) => {
-  res.send(signup({}));
-
-})
-
-
-const { validationResult } = require('express-validator');
+const session = require('express-session');
 const { check } = require('express-validator');
+path = require('path');
+fs = require('fs');
 
 
 app.set('view engine', 'ejs')
@@ -80,9 +67,12 @@ const transporter = nodemailer.createTransport({
 // Generate OTP
 const generateOTP = () => {
   return otpGenerator.generate(6, { digits: true, alphabets: false, upperCase: false, specialChars: false });
+ 
 };
 
 const otp = generateOTP();
+
+
 
 
 // generate Captcha
@@ -95,7 +85,7 @@ async function run() {
   
 }     
 
-const capt = run()
+const capt = run();
 
 
 
@@ -130,14 +120,14 @@ app.post('/verify-otp', function (req, res) {
 
 
 
-app.get('/register-captcha', (req, res) => {
+app.get('/', (req, res) => {
   res.render('register-captcha');
 })
 
 
 
 
-app.post('/register-captcha', function (req, res) {
+app.post('/', function (req, res) {
   data = {
     fname: req.body.fname,
     lname: req.body.lname,
@@ -151,42 +141,115 @@ app.post('/register-captcha', function (req, res) {
   
   };
   
-  if ( data.cap == generatecaptcha && data.phone.length == 10 && data.password == data.confirmPassword && data.fname != '' && data.lname != '' && data.dob != '' && data.city != '' && data.mail != '' && data.password != '' && data.confirmPassword != '' ) {
-      const mailOptions = {
-        from: 'ranjitkajraitha@gmail.com',
-        to: data.mail,
-        subject: 'OTP Verification',
-        text: `Hello ${data.fname} 
-        your password is: ${data.password},
-        your phone number is: ${data.phone},
-        Your OTP is: ${otp}`
-      };
+  
+  pass = check(data.confirmPassword).trim().isLength({ min: 8 ,  max: 16 });
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log(error);
-          res.status(500).send('Failed to send OTP');
-        } else {
-          console.log('OTP sent:', info.response);
-          res.status(200)
-          res.render( 'verify-otp');
-        }
-      });
- }
-  else {
-      res.render('incorrect captcha');
+ 
+  
+
+  if ( data.cap != generatecaptcha ) {
+    res.send('incorrect captcha');
   }
-});
+  else if (data.password != data.confirmPassword) {
+    res.send('confirm password not match');
+  }
+  else if (data.password == data.phone) {
+    res.send('phone number can not be password');
+  }
+  else if (data.password == data.mail) {
+    res.send('mail can not be password');
+  }
+  else if (data.password == data.dob) {
+    res.send('dob can not be password');
+  }
+  else if ( pass ) {
+    res.send('password length should be min 8 and max 16 char');
+  }
+  else {
+    const mailOptions = {
+      from: 'ranjitkajraitha@gmail.com',
+      to: data.mail,
+      subject: 'OTP Verification',
+      text: `Hello ${data.fname}
+      your password is: ${data.password},
+      your phone number is: ${data.phone},
+      Your OTP is: ${otp}`
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        res.status(500).send('Failed to send OTP');
+      } else {
+        console.log('OTP sent:', info.response);
+        res.status(200)
+        res.render( 'verify-otp');
+      }
+    });
+  }
+})
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // const mailOptions = {
+      //   from: 'ranjitkajraitha@gmail.com',
+      //   to: data.mail,
+      //   subject: 'OTP Verification',
+      //   text: `Hello ${data.fname} 
+      //   your password is: ${data.password},
+      //   your phone number is: ${data.phone},
+      //   Your OTP is: ${otp}`
+      // };
+
+      // transporter.sendMail(mailOptions, (error, info) => {
+      //   if (error) {
+      //     console.log(error);
+      //     res.status(500).send('Failed to send OTP');
+      //   } else {
+      //     console.log('OTP sent:', info.response);
+      //     res.status(200)
+      //     res.render( 'verify-otp');
+      //   }
+      // });
+//  }
+//   else {
+//       res.render('incorrect captcha');
+//   }
+// })
+
 
 
 // Start the server
 app.listen(3000, () => {
   console.log('Server started on port 3000');
 });
-
-
-
-
-
-
 
