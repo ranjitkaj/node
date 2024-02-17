@@ -122,47 +122,21 @@ module.exports = Usermodel;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 app.set("view engine","ejs");
 app.use(express.urlencoded({extended:false}))
 
-app.get("/",async(req,res)=>{
-    const users = await User.find();
-    res.render("index.ejs",{
-        title:"this is homepage",
-        users:users
-    })
+// app.get("/",async(req,res)=>{
+//     const users = await User.findone( {name:"Sujeet kumar"});
+//     res.render("index.ejs",{
+//         title:"this is homepage",
+//         users:users
+//     })
   
-})
+// })
 
 app.post("/register",async(req,res)=>{
-    const {name,email,password}=req.body;
-    const newuser = new User({name,email,password});
+    const {name, mobile,address,salary, date, email,password}=req.body;
+    const newuser = new User({name, mobile,address,salary, date, email,password});
     const usersave = await newuser.save();
     res.redirect("/");
 })
