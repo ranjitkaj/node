@@ -39,6 +39,8 @@ const { check } = require('express-validator');
 path = require('path');
 fs = require('fs');
 
+dotenv = require('dotenv').config({ path: './.env' });
+
 
 app.set('view engine', 'ejs')
 app.use(express.json());
@@ -57,8 +59,8 @@ const transporter = nodemailer.createTransport({
   secure: true,
   
   auth: {
-    user: 'ranjitkajraitha@gmail.com',
-    pass: 'dqmu vdzb efcf xeen'
+    user: process.env.email,
+    pass: process.env.pass
   }
 });
 
