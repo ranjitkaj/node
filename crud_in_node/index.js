@@ -1,7 +1,7 @@
 const express = require("express")
 const app = express();
-port = 3000;
-//const User = require("./database")
+port = process.env.PORT || 3000;
+// const User = require("./database")
 
 app.listen(port , ()=>{
     console.log(`app is running on port ${port}`)
@@ -15,17 +15,16 @@ mongoose.connect("mongodb://localhost:27017/crud_in_node").then(()=>{
     console.log(e);
 })
 const Schema = new mongoose.Schema({
-    name:{type: String, required: true},
-    email:{type: String, required: true},
-    password:{type: String, required: true},
+    name: String,
+    email: String,
+    password: String,
+    cpassword: String,
     date:{type: Date, default: Date.now},
-    mobile:{type: Number},
-    address:{type: String},
-    salary:{type: Number}
-
-})
+    mobile: Number,
+    address: String
+ })
 const Usermodel = mongoose.model("User" , Schema);
-module.exports = Usermodel;
+// module.exports = Usermodel;
 
 // ########   created in sync way   #######
 
@@ -126,7 +125,7 @@ app.set("view engine","ejs");
 app.use(express.urlencoded({extended:false}))
 
 // app.get("/",async(req,res)=>{
-//     const users = await User.findone( {name:"Sujeet kumar"});
+//     const users = await User.findone({});
 //     res.render("index.ejs",{
 //         title:"this is homepage",
 //         users:users
@@ -135,10 +134,10 @@ app.use(express.urlencoded({extended:false}))
 // })
 
 app.post("/register",async(req,res)=>{
-    const {name, mobile,address,salary, date, email,password}=req.body;
-    const newuser = new User({name, mobile,address,salary, date, email,password});
+    const {name, email, password, cpassword, date, mobile, address}=req.body;
+    const newuser = new Usermodel({name, email, password, cpassword, date, mobile, address});
     const usersave = await newuser.save();
-    res.redirect("/");
+    res.redirect("/register");
 })
 
 app.get("/register",(req,res)=>{
