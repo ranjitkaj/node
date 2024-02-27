@@ -58,7 +58,7 @@ const transporter = nodemailer.createTransport({
   
   auth: {
     user: 'ranjitkajraitha@gmail.com',
-    pass: 'tueq jbzp beha bfmr'
+    pass: 'dqmu vdzb efcf xeen'
   }
 });
 
@@ -141,12 +141,7 @@ app.post('/', function (req, res) {
   
   };
   
-  
-  pass = check(data.confirmPassword).trim().isLength({ min: 8 ,  max: 16 });
-
- 
-  
-
+    
   if ( data.cap != generatecaptcha ) {
     res.send('incorrect captcha');
   }
@@ -162,9 +157,11 @@ app.post('/', function (req, res) {
   else if (data.password == data.dob) {
     res.send('dob can not be password');
   }
-  else if ( pass ) {
+  else if ( data.password.length < 8 || data.password.length > 16 ) {
     res.send('password length should be min 8 and max 16 char');
-  }
+  }else if (data.phone.length < 10 || data.phone.length > 10) {
+    res.send('phone number length should be 10 char');
+  }       
   else {
     const mailOptions = {
       from: 'ranjitkajraitha@gmail.com',
